@@ -31,7 +31,7 @@ for tr=1:fnum
         load([root listing(tes(te)).name])
         Xsr=x; Ys=y;
         idsP=Yt==1; idsN=Yt==0;
-        
+
         % Centroid Alignment
         Cs=centroid_align(Xsr,ref{1});
         Ct=centroid_align(Xtr,ref{1});
@@ -39,13 +39,13 @@ for tr=1:fnum
         % Logarithmic mapping on aligned covariance matrices
         Xs=logmap(Cs,'MI'); % dimension: 1770*200 (features*samples)
         Xt=logmap(Ct,'MI');
-        
+
         % Dimensionality reduction by one-way ANOVA based on F-values
         [idx, Fs]=Fvalue(Xs', Ys, length(Ys));
         Xs=Fs'; Xt=Xt(idx,:);
 
         %% MEKT
-        options.d = 10;             % subspace bases 
+        options.d = 10;             % subspace bases
         options.T = 5;              % iterations, default=5
         options.alpha= 0.01;        % the parameter for source discriminability
         options.beta = 0.1;         % the parameter for target locality, default=0.1
